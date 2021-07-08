@@ -17,11 +17,17 @@ app.use(router);
 
 io.on('connection', (socket) => {
 
+    socket.broadcast.emit('hi');
+
     console.log('🚀 A user has just logged in');
 
     socket.on('disconnect', () => {
         console.log('👋 A user has just logged out');
     });
+
+    socket.on('chat message', msg => {
+        io.emit('chat message', msg);
+      });
 
     socket.on('chat message', (msg) => {
         console.log('📬 New message are sended in the chat room : ' + msg);
