@@ -9,28 +9,23 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/frontend/index.html');
-});
+app.use('/', express.static('frontend'));
 
 app.use(router);
 
 io.on('connection', (socket) => {
 
-    socket.broadcast.emit('hi');
+    // When a user arrives, a message is sent
+    io.emit('chat message', 'A new user has arrived! 🚀');
 
-    console.log('🚀 A user has just logged in');
-
+    // When a user left, a message is sent
     socket.on('disconnect', () => {
-        console.log('👋 A user has just logged out');
+        io.emit('chat message', 'A user has left 🚶');
     });
 
-    socket.on('chat message', msg => {
-        io.emit('chat message', msg);
-      });
-
+    // When a message is send, we emit the event
     socket.on('chat message', (msg) => {
-        console.log('📬 New message are sended in the chat room : ' + msg);
+        io.emit('chat message', msg);
     });
 
 });
