@@ -6,6 +6,7 @@ const port = process.env.PORT || 3003;
 const router = require('./app/routers/router');
 const { Server } = require('socket.io');
 
+const userInit = require('./app/middlewares/userInit');
 
 const app = express();
 const server = http.createServer(app);
@@ -13,15 +14,21 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+
+app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', './app/views');
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(userInit);
 app.use(router);
 
 io.on('connection', (socket) => {

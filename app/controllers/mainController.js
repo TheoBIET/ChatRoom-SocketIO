@@ -1,14 +1,29 @@
 module.exports = {
     homePage: (req, res) => {
+        if (!req.session.user) {
+            return res.redirect('/login');
+        }
+
         res.render('message');
     },
 
     loginForm: (req, res) => {
-        res.render('message');
+        res.render('login');
     },
 
     handleLoginForm: (req, res) => {
-        res.render('message');
+        const user = req.body;
+
+        if (user.username) {
+            req.session.user = {
+                username: user.username,
+            };
+            res.redirect('/');
+        } else {
+            res.render('login', {
+                error: 'Vous n\'avez pas saisi de nom d\'utilisateur.',
+            });
+        }
     },
 
     signupForm: (req, res) => {

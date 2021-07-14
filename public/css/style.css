@@ -47,6 +47,14 @@ body {
 #chatBox-left {
     background-color: #b86bff;
     width: 20%;
+    padding: 2em;
+}
+
+#chatBox-left-user {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #F8F8ff;
 }
 
 #chatBox-right {
@@ -192,4 +200,44 @@ body {
 
 button {
     border: none;
+}
+
+#chatBox-loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#chatBox-LoginForm {
+    display: flex;
+}
+
+#chatBox-LoginForm input[type="text"] {
+    border: none;
+    font-size: 1.8em;
+    border-radius: 20px;
+    padding: .5em;
+}
+
+#chatBox-LoginForm input[type="submit"] {
+    background-color: #b86bff;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    color: #f8f8ff;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: 0.3s ease-in-out;
+    border: none;
+}
+
+#chatBox-LoginForm input[type="submit"]:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+#chatBox-LoginForm input[type="submit"]:active {
+    transform: scale(.9);
 }
