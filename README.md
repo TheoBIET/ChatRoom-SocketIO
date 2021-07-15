@@ -2,6 +2,7 @@
      alt="Logo Socket IO" width="120" height="120">
 
 # ChatRoom-SocketIO 📬 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+## Work in Progress
 
 ## Informations 👀
 
